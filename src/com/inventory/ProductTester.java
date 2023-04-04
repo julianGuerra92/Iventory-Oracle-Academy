@@ -1,34 +1,52 @@
 package com.inventory;
 
 import com.inventory.model.Product;
+import com.inventory.model.ProductList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
 
 /**
- * @authors  Julián Andrés Rodríguez Guerra - Oscar Albeiro Blandón Agudelo
- * @since Febrero 20 de 2023
  * @version 0.0.1
  * Ejercicio inventory correspondiente al curso java de Oracle
+ * @authors Julián Andrés Rodríguez Guerra
+ * @since Febrero 20 de 2023
  */
 public class ProductTester {
-    public static void main(String[] args) {
-        Product product1 = new Product("Lavadora", 500000f, 5, "1");
-        Product product2 = new Product("Horno Microondas", 150000.150f, 10, "2");
-        Product product3 = new Product("Nevera", 849550.480f, 20, "3");
-        Product product4 = new Product("Televisor", 1500000f, 3, "4");
-        Product product5 = new Product();
-        Product product6 = new Product();
-        product5.setName("Computador Dell");
-        product5.setPrice(4500000.850f);
-        product5.setQuantity(150);
-        product5.setId("5");
-        product6.setName("Ipad Mini");
-        product6.setPrice(3500000.460f);
-        product6.setQuantity(30);
-        product6.setId("6");
-        System.out.println(product1.toString());
-        System.out.println(product2.toString());
-        System.out.println(product3.toString());
-        System.out.println(product4.toString());
-        System.out.println(product5.toString());
-        System.out.println(product6.toString());
+
+    private static int tempQuantity;
+    private static String tempName;
+    private static String tempID;
+    private static float tempPrice;
+    private static ProductList productList;
+
+    public static String readData(String message) throws IOException {
+        String data;
+        System.out.print(message);
+        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+        data = stdin.readLine();
+        return data;
+    }
+
+    public static void registerProduct() throws IOException {
+        tempID = readData("Por favor ingrese el ID del producto a registrar o 9999 para salir: ");
+        while (!tempID.equals("9999")) {
+            tempName = readData("Nombre del producto: ");
+            tempPrice = Float.parseFloat(readData("Precio por Unidad: "));
+            tempQuantity = Integer.parseInt(readData("Cantidad de Unidades en Inventario: "));
+            productList.addProduct(new Product(tempName, tempPrice, tempQuantity, tempID));
+            System.out.print("\nRegistro exitoso!\n\n");
+            tempID = readData("Ingrese otro ID de producto o 9999 para salir: ");
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        productList = new ProductList();
+        System.out.println("---> Bienvenido al sistema de inventario! <---");
+        registerProduct();
+        System.out.println("\nImprimiedo resultados de ingreso al inventario:");
+        productList.printList();
     }
 }

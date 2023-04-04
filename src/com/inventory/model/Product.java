@@ -10,70 +10,74 @@ public class Product {
     private float price;
     private int quantity;
     private String id;
+    private boolean active;
 
     //Constructores de clase genérico
-    public Product(){
-        name = "";
-        price = 0;
-        quantity = 0;
-        id = "";
+    public Product() {
     }
 
     //Constructor de clase con argumentos
-    public Product(String name, float price, int quantity, String id){
+    public Product(String name, float price, int quantity, String id) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.id = id;
+        this.active = false;
     }
 
-    //Método para obtener el valor de la variable name
     public String getName() {
         return name;
     }
 
-    //Método para modificar el valor de la variable name
     public void setName(String name) {
         this.name = name;
     }
 
-    //Método para obtener el valor de la variable price
     public float getPrice() {
         return price;
     }
 
-    //Método para modificar el valor de la variable price
     public void setPrice(float price) {
         this.price = price;
     }
 
-    //Método para obtener el valor de la variable quantity
     public int getQuantity() {
         return quantity;
     }
 
-    //Método para modificar el valor de la variable quantity
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    //Método para obtener el valor de la variable id
     public String getId() {
         return id;
     }
 
-    //Método para modificar el valor de la variable id
     public void setId(String id) {
         this.id = id;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public float calculateValueInventiry(){
+        return quantity * price;
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         String productInformation =
-                "Item Number       "+": "+id+"\n"+
-                "Name              "+": "+name+"\n"+
-                "Quantity in Stock "+": "+quantity+"\n"+
-                "price             "+": "+price+"\n";
+                        "Item Number       " + ": " + id + "\n" +
+                        "Name              " + ": " + name + "\n" +
+                        "Quantity in Stock " + ": " + quantity + "\n" +
+                        "Price             " + ": " + price + "\n" +
+                        "Stock Value       " + ": " + calculateValueInventiry() + "\n" +
+                        "Product Status    " + ": " + ((active) ? "Activo" : "Descatalogado" + "\n");
         return productInformation;
     }
 }
