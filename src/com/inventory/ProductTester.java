@@ -34,11 +34,15 @@ public class ProductTester {
         tempID = readData("Por favor ingrese el ID del producto a registrar o 9999 para salir: ");
         while (!tempID.equals("9999")) {
             tempName = readData("Nombre del producto: ");
-            tempPrice = Float.parseFloat(readData("Precio por Unidad: "));
-            tempQuantity = Integer.parseInt(readData("Cantidad de Unidades en Inventario: "));
-            productList.addProduct(new Product(tempName, tempPrice, tempQuantity, tempID));
-            System.out.print("\nRegistro exitoso!\n\n");
-            tempID = readData("Ingrese otro ID de producto o 9999 para salir: ");
+            try {
+                tempPrice = Float.parseFloat(readData("Precio por Unidad: "));
+                tempQuantity = Integer.parseInt(readData("Cantidad de Unidades en Inventario: "));
+                productList.addProduct(new Product(tempName, tempPrice, tempQuantity, tempID));
+                System.out.print("\nRegistro exitoso!\n\n");
+                tempID = readData("Ingrese otro ID de producto o 9999 para salir: ");
+            } catch (Exception exception) {
+                System.out.println("Se debe ingresar sólo números!");
+            }
         }
     }
 
